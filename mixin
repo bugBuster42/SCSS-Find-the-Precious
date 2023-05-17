@@ -1,0 +1,41 @@
+@mixin ring($size, $color, $addShadow: true) {
+    $borderWidth: $size * 0.1;
+    $shadowSize: $size * 0.2;
+
+    width: $size;
+    height: $size;
+    border: $borderWidth solid $color;
+    border-radius: 50%;
+    background-color: transparent;
+
+    @if $addShadow {
+        box-shadow: 0 0 $shadowSize rgba(0, 0, 0, 0.5);
+    }
+}
+
+.orange_ring {
+    @include ring(30px, orange, false);
+}
+
+.yellow_ring {
+    @include ring(100px, yellow);
+}
+
+.black_ring {
+    display: flex;
+    align-items: center;
+    margin-top: 50px;
+
+    .inner_rings {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @for $i from 1 through 6 {
+            $size: 25px + ($i * 5px);
+            .ring-#{$i} {
+                @include ring($size, black);
+                margin: -6px;
+            }
+        }
+    }
+}
